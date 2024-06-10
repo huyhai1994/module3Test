@@ -1,0 +1,52 @@
+SHOW DATABASES;
+
+CREATE DATABASE product_management_app;
+DROP DATABASE product_management_app;
+
+USE product_management_app;
+
+CREATE TABLE `product_category`
+(
+    `id`   INT AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `products`
+(
+    `id`          INT AUTO_INCREMENT,
+    `name`        VARCHAR(100)  NOT NULL,
+    `price`       DOUBLE(12, 2) NOT NULL,
+    `desc`        TEXT,
+    `category_id` INT,
+    `quantity`    INT,
+    `color`       VARCHAR(100),
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`category_id`) REFERENCES `product_category` (`id`)
+);
+
+SHOW TABLES from product_management_app;
+
+INSERT INTO products (`name`, `price`, `category_id`, `quantity`, `color`)
+VALUES ('iphone11', 799.0, 1, 12, 'BLACK'),
+       ('iphone11Pro', 1100.0, 1, 12, 'YELLOW'),
+       ('iphoneX', 749.0, 1, 12, 'YELLOW'),
+       ('SmartTV55inch', 799.0, 2, 12, 'YELLOW'),
+       ('TuLanh2CanhToshiba', 799.0, 3, 12, 'GREEN'),
+       ('MayGiatCuaNgangSamSung', 320, 4, 12, 'BLACK');
+
+SELECT *
+FROM products;
+
+INSERT INTO product_category (name)
+VALUES ('Phone'),
+       ('Tivi'),
+       ('TuLanh'),
+       ('MayGiat');
+
+SELECT *
+FROM product_category;
+
+SELECT products.name, products.price, products.quantity, products.color, product_category.name
+FROM products
+         JOIN product_category ON products.category_id = product_category.id;
