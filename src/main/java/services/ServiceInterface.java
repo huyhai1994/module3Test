@@ -1,5 +1,8 @@
 package services;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -15,7 +18,7 @@ public interface ServiceInterface<T> {
     /**
      * Renders a page for displaying all entities.
      */
-    void renderPageFindAll();
+    void renderPageFindAll(HttpServletRequest request, HttpServletResponse response) throws SQLException;
 
     /**
      * Renders a page for creating a new entity.

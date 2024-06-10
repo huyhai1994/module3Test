@@ -6,6 +6,8 @@ package controllers;
  * @version 1.0
  * */
 public class ServletUrlPath {
+    public static final String PRODUCT_LIST = "/product/list";
+    public static final String PRODUCT = "/product/*";
 
 
 }
