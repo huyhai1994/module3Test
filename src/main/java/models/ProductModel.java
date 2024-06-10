@@ -37,8 +37,6 @@ public class ProductModel {
         }
     }
 
-
-
     public void save(Product product) throws SQLException {
         String sql = "INSERT INTO products(`name`, `price`, `category_id`, `quantity`, `color`) VALUE (?,?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
