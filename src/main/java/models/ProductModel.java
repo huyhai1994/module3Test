@@ -38,13 +38,14 @@ public class ProductModel {
             System.out.println(color);
             String categoryName = resultSet.getString("product_category.name");
             System.out.println(categoryName);
+
+            System.out.println("/n");
             Product product = new Product();
             product.setName(name);
             product.setPrice(price);
             product.setQuantity(quantity);
             product.setCategory(categoryName);
             product.setColor(color);
-
             products.add(product);
         }
         return products;
