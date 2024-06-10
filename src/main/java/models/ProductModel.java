@@ -12,11 +12,43 @@ import java.util.List;
 
 public class ProductModel {
 
-    private Connection connection;
+    private final Connection connection;
 
     public ProductModel() {
         DatabaseConnector databaseConnector = new DatabaseConnector();
-        this.connection = databaseConnector.getConnection();
+        this.connection = DatabaseConnector.getConnection();
+    }
+
+    private static void retrievingResultAndAddToProducts(ResultSet resultSet, List<Product> products) throws SQLException {
+        while (true) {
+            if (!resultSet.next()) break;
+            String name = resultSet.getString("products.name");
+            Double price = resultSet.getDouble("products.price");
+            int quantity = resultSet.getInt("products.quantity");
+            String color = resultSet.getString("products.color");
+            String categoryName = resultSet.getString("product_category.name");
+            Product product = new Product();
+            product.setName(name);
+            product.setPrice(price);
+            product.setQuantity(quantity);
+            product.setCategoryName(categoryName);
+            product.setColor(color);
+            products.add(product);
+        }
+    }
+
+
+
+    public void save(Product product) throws SQLException {
+        String sql = "INSERT INTO products(`name`, `price`, `category_id`, `quantity`, `color`) VALUE (?,?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, product.getName());
+        preparedStatement.setDouble(2, product.getPrice());
+        preparedStatement.setInt(3, product.getCategoryId());
+        preparedStatement.setInt(4, product.getQuantity());
+        preparedStatement.setString(5, product.getColor());
+        preparedStatement.execute();
+        preparedStatement.close();
     }
 
     public List<Product> getAll() throws SQLException {
@@ -27,27 +59,7 @@ public class ProductModel {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         System.out.println("ProductModel here");
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            String name = resultSet.getString("products.name");
-            System.out.println(name);
-            Double price = resultSet.getDouble("products.price");
-            System.out.println(price);
-            int quantity = resultSet.getInt("products.quantity");
-            System.out.print(quantity);
-            String color = resultSet.getString("products.color");
-            System.out.println(color);
-            String categoryName = resultSet.getString("product_category.name");
-            System.out.println(categoryName);
-
-            System.out.println("/n");
-            Product product = new Product();
-            product.setName(name);
-            product.setPrice(price);
-            product.setQuantity(quantity);
-            product.setCategory(categoryName);
-            product.setColor(color);
-            products.add(product);
-        }
+        retrievingResultAndAddToProducts(resultSet, products);
         return products;
     }
 }

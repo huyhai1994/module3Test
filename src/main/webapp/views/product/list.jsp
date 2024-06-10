@@ -8,7 +8,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% List<Product> products = (List<Product>) request.getAttribute("products"); %>
 
 <html>
@@ -174,8 +173,10 @@
                         <td><c:out value="${i}"/></td>
                         <td><c:out value="${product.name}"/></td>
                         <td><c:out value="${product.price}"/></td>
-                        <td><c:out value="${product.quantity}"/> </td>
-                        <td><c:out value="${product.category}"/></td>
+                        <td><c:out value="${product.quantity}"/></td>
+                        <td><c:out value="${product.color}"/></td>
+                        <td><c:out value="${product.getCategoryName()}"/></td>
+
                         <td>
                             <button type="button" class="btn btn-success"><i class="fa-solid fa-user-pen"></i></button>
                             <!--Modal Delete-->

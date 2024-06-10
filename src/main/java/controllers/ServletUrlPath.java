@@ -4,10 +4,7 @@ package controllers;
  * ServletUrlPath is a utility class for mapping URLs to Servlets.
  *
  * @version 1.0
- * */
+ */
 public class ServletUrlPath {
-    public static final String PRODUCT_LIST = "/product/list";
     public static final String PRODUCT = "/product/*";
-
-
 }

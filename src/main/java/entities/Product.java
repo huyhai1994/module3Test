@@ -3,11 +3,12 @@ package entities;
 public class Product {
     private String name;
     private double price;
-    private  int quantity;
+    private int quantity;
     private String color;
-    private String Category;
+    private Category category;
 
     public Product() {
+        category = new Category();
     }
 
     public String getName() {
@@ -42,11 +43,19 @@ public class Product {
         this.color = color;
     }
 
-    public String getCategory() {
-        return Category;
+    public String getCategoryName() {
+        return category.getName();
     }
 
-    public void setCategory(String category) {
-        Category = category;
+    public void setCategoryName(String category) {
+        this.category.setName(category);
+    }
+
+    public int getCategoryId() {
+        return this.category.getId();
+    }
+
+    public void setCategoryId(int id) {
+        this.category.setId(id);
     }
 }
